@@ -77,14 +77,14 @@
 
 ## Create and upload an image with Packer
 
-### On the GE's side
+### On the SE's side
 
-* Create a directory named after your GE.
-* Inside the new directory, create an `install.sh` file with execution rights. This file must contain all the required steps to setup a GE on an Ubuntu 14.04:
+* Create a directory named after your SE.
+* Inside the new directory, create an `install.sh` file with execution rights. This file must contain all the required steps to setup a SE on an Ubuntu 14.04:
     * Install dependencies.
-	* Download GE's archive.
-	* Install GE.
-	* Setup an automatic boot process for the GE. **It mustn't directly start the GE, because this file will be launch only once during the image's creation.**
+	* Download SE's archive.
+	* Install SE.
+	* Setup an automatic boot process for the SE. **It mustn't directly start the SE, because this file will be launch only once during the image's creation.**
 
 	If the `install.sh` requires local files, they will be present in the same temporary directory during the installation step.
 	This temporary directory will only exist during the installation step so the `install.sh` script must save/move any persistent files.
@@ -108,10 +108,11 @@ This example shows how to use a local file during the installation.
 First the `packer-feedsync` directory must contain the following files:
 
 ```
-(env)tai@Sydney:~/projects/Others/filab-packer-rtc/feedsync$ tree ge
-ge
+(.env)tai@Sydney:~/fic2-poc-basic_packer_examples$ tree packer-feedsync/
+packer-feedsync/
 ├── feedsync.war
-└── install.sh
+├── install.sh
+└── README.md
 
 0 directories, 3 files
 ```
@@ -128,15 +129,15 @@ During the installation, the current directory is saved in the `D` variable and 
 * Create a floating ip: `nova floating-ip-create`
 
 * Inspect the `ubuntu_14.04_x86-generic.json` file and tweak the various fields:
-    * "flavor": the type of machine running the GE.
+    * "flavor": the type of machine running the SE.
 	* "source_image": the Ubuntu 14.04 base image's id.
 	* "networks": the local network's id where the instances will get their private ip.
 	* "floating_ip": the previously created floating ip.
-	* "security_groups": the security group bound with the GE.
+	* "security_groups": the security group bound with the SE.
 
 #### Use Packer
 
-* Choose a GE's directory.
+* Choose a SE's directory.
 
 * Remove the image in glance if it already exists: `nova image-delete`.
 
