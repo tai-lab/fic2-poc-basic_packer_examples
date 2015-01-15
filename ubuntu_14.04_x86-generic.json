@@ -1,0 +1,34 @@
+{
+  "variables":
+    {
+      "dir": null
+    },
+
+  "builders":
+    [
+      {
+        "type": "openstack",
+      	"ssh_username": "root",
+      	"flavor": "2",
+      	"source_image": "3d1afab8-cdf8-457f-85f3-07c01cf67a6d",
+      	"networks": ["7f8b008f-a5b6-45ed-840d-b2c38b5b6803"],
+      	"use_floating_ip": true,
+      	"floating_ip": "193.52.45.132",
+      	"security_groups": ["ssh"],
+      	"image_name": "{{user `dir`}}__{{timestamp}}"
+      }
+    ],
+
+  "provisioners":
+    [
+      {
+        "type": "file",
+  	"source": "{{user `dir`}}",
+  	"destination": "/tmp"
+      },
+      {
+        "type": "shell",
+	"inline": "cd /tmp/{{user `dir`}} && ./install.sh && sync"
+      }
+    ]
+}
