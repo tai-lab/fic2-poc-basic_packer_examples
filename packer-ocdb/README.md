@@ -6,4 +6,4 @@ Source: [https://github.com/fraunhoferfokus/OCDB](https://github.com/fraunhoferf
 
 After launching an instance, the OCDB endpoint can be tested with the command:
 
-    curl -k curl -k -X GET 'https://localhost/v1/cities' -H 'Accept: application/json'
+    curl -k -X GET 'https://localhost/v1/cities' -H 'Accept: application/json'
